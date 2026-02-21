@@ -1,8 +1,11 @@
 import TableRow from "./TableRow";
-
-function TableCoin({ coins }) {
+import { RotatingLines } from "react-loader-spinner";
+function TableCoin({ coins, isLoading }) {
   return (
     <div>
+      { isLoading ? 
+      <RotatingLines strokeColor="#3874ff" strokeWidth="2" />
+      : 
       <table>
         <thead>
           <tr>
@@ -20,6 +23,7 @@ function TableCoin({ coins }) {
           ))}
         </tbody>
       </table>
+      }
     </div>
   );
 }
