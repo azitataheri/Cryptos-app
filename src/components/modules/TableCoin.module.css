@@ -26,10 +26,10 @@
 }
 
 .table tbody tr {
-    height: 80px;
+    height: 60px;
     border-bottom: 1px solid #22262e;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #fff;
 }
 

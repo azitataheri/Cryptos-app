@@ -21,8 +21,8 @@ function HomePage() {
   }, [page]);
   return (
     <div>
-      <Pagination page={page} setPage={setPage}/>
       <TableCoins coins={coins} isLoading={isLoading} />
+      <Pagination page={page} setPage={setPage}/>
     </div>
   );
 }
