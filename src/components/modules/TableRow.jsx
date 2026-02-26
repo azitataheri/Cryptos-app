@@ -2,9 +2,12 @@ import chartUp from "../../assets/chart-up.svg";
 import chartDown from "../../assets/chart-down.svg";
 
 import styles from "../modules/TableCoin.module.css";
+import { marketChart } from "../../services/cryptoApi";
+import js from "@eslint/js";
 
 const TableRow = ({
   coin: {
+    id,
     name,
     image,
     symbol,
@@ -12,12 +15,24 @@ const TableRow = ({
     current_price,
     price_change_percentage_24h: price_change
   },
+  setChart
 }) => {
+  const showHandler = async () => {
+    try{
+      const res = await fetch(marketChart(id))
+      const json = await res.json()
+      console.log(json);
+      
+      setChart(json)
+    }catch(error){
+   setChart(null)
+    } 
+  }
 
   return (
     <tr>
       <td>
-        <div className={styles.symbol}>
+        <div className={styles.symbol} onClick={showHandler}>
           <img src={image} alt="" />
           <span>{symbol.toUpperCase()}</span>
         </div>
