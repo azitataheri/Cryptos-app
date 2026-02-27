@@ -18,7 +18,7 @@ function TableCoin({ coins, isLoading, setChart }) {
             <th>Price</th>
             <th>24h</th>
             <th>Total volume</th>
-            <th></th>
+            <th>Inc/Dec</th>
           </tr>
         </thead>
         <tbody>
