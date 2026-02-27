@@ -3,31 +3,26 @@ import chartDown from "../../assets/chart-down.svg";
 
 import styles from "../modules/TableCoin.module.css";
 import { marketChart } from "../../services/cryptoApi";
-import js from "@eslint/js";
 
-const TableRow = ({
-  coin: {
+const TableRow = ({ coin, setChart }) => {
+  const {
     id,
     name,
     image,
     symbol,
     total_volume,
     current_price,
-    price_change_percentage_24h: price_change
-  },
-  setChart
-}) => {
+    price_change_percentage_24h: price_change,
+  } = coin;
   const showHandler = async () => {
-    try{
-      const res = await fetch(marketChart(id))
-      const json = await res.json()
-      console.log(json);
-      
-      setChart(json)
-    }catch(error){
-   setChart(null)
-    } 
-  }
+    try {
+      const res = await fetch(marketChart(id));
+      const json = await res.json();
+      setChart({...json, coin: coin});
+    } catch (error) {
+      setChart(null);
+    }
+  };
 
   return (
     <tr>
@@ -38,23 +33,13 @@ const TableRow = ({
         </div>
       </td>
       <td>{name}</td>
-      <td>
-        {current_price.toLocaleString()}</td>
-      <td
-        className={
-          price_change > 0 ? styles.success : styles.error
-        }
-      >
-        {
-          price_change !=  null &&
-          price_change.toFixed(2)}
+      <td>{current_price.toLocaleString()}</td>
+      <td className={price_change > 0 ? styles.success : styles.error}>
+        {price_change != null && price_change.toFixed(2)}
       </td>
       <td>{total_volume.toLocaleString()}</td>
       <td>
-        <img
-          src={price_change > 0 ? chartUp : chartDown}
-          alt={name}
-        />
+        <img src={price_change > 0 ? chartUp : chartDown} alt={name} />
       </td>
     </tr>
   );
